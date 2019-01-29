@@ -55,11 +55,38 @@ function doLogout()
 	hideOrShow( "accessUIDiv", false);
 	hideOrShow( "loginDiv", true);
 }
+
 function createUser()
 {
   var login = document.getElementById("loginName").value;
   var password = document.getElementById("loginPassword").value;
+
+	var jsonPayload = '{"login" : "' + login + '", "password" : "' + password + '"}';
+	var url = urlBase + '/Signup.' + extension;
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				document.getElementById("addUser").innerHTML = "User has been created";
+			}
+		};
+
+		xhr.send(jsonPayload);
+
+		doLogin();
+	}
+	catch(err)
+	{
+		document.getElementById("addUser").innerHTML = err.message;
+	}
 }
+
 function hideOrShow( elementId, showState )
 {
 	var vis = "visible";
