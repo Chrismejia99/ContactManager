@@ -36,6 +36,8 @@ function doLogin()
 		document.getElementById("loginName").value = "";
 		document.getElementById("loginPassword").value = "";
 
+
+    // will have to load contacts, set contact id attributes
 		hideOrShow( "loggedInDiv", true);
 		hideOrShow( "accessUIDiv", true);
 		hideOrShow( "loginDiv", false);
@@ -57,8 +59,6 @@ function doLogout()
 }
 function createUser()
 {
-  var login = document.getElementById("loginName").value;
-  var password = document.getElementById("loginPassword").value;
 }
 function hideOrShow( elementId, showState )
 {
@@ -73,13 +73,36 @@ function hideOrShow( elementId, showState )
 	document.getElementById( elementId ).style.visibility = vis;
 	document.getElementById( elementId ).style.display = dis;
 }
+function loadContacts()
+{
+	var url = urlBase + '/Test.' + extension;
+	var jsonPayload = '{"userId" : "' + userId + '"}';
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.send(jsonPayload);
 
+		var jsonObject = JSON.parse( xhr.responseText );
+
+
+	}
+	catch(err)
+	{
+		document.getElementById("loginResult").innerHTML = err.message;
+	}
+
+}
 function addContact()
 {
-	var newColor = document.getElementById("colorText").value;
+	var newName = document.getElementById("name").value;
+  var newPhone = document.getElementById("phone").value;
+  var newEmail = document.getElementById("email").value;
+
 	document.getElementById("colorAddResult").innerHTML = "";
 
-	var jsonPayload = '{"color" : "' + newColor + '", "userId" : ' + userId + '}';
+	var jsonPayload = '{"Name" : "' + newName + '", "phone" : "' + newPhone + '", "email" : "' + newEmail + '", "userId" : ' + userId + '}';
 	var url = urlBase + '/AddColor.' + extension;
 
 	var xhr = new XMLHttpRequest();
@@ -91,6 +114,7 @@ function addContact()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
+				// change this to add contact HTML and display all the contacts
 				document.getElementById("colorAddResult").innerHTML = "Color has been added";
 			}
 		};
@@ -102,12 +126,22 @@ function addContact()
 	}
 
 }
-function deleteContact()
+
+function deleteContact(contactId)
 {
   // will probably unique ID from contact HTML
+
+
+  // var jsonPayload = '{"userId" : "' + userId + '", "Name" : "' + contactName + '"}';
+	var url = urlBase + '/Delete.' + extension;
+	var jsonPayload = '{"userId" : "' + userId + '",  "contactId" : "' + contactId + '"}';
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
 }
 function searchContact()
 {
+  // might have to make all html in one page to preserve userId, otherwise new document will reset it's id to 0
 	var srch = document.getElementById("searchText").value;
 	document.getElementById("colorSearchResult").innerHTML = "";
 
