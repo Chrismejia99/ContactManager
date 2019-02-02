@@ -11,7 +11,7 @@ function doLogin()
 	var login = document.getElementById("loginName").value;
 	var password = document.getElementById("loginPassword").value;
 
-	document.getElementById("loginResult").innerHTML = "";
+	// document.getElementById("loginResult").innerHTML = "";
 
 	var jsonPayload = '{"login" : "' + login + '", "password" : "' + password + '"}';
 	var url = urlBase + '/Login.' + extension;
@@ -29,7 +29,7 @@ function doLogin()
 
 		if( userId < 1 )
 		{
-			document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+			// document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 			return;
 		}
 
@@ -39,12 +39,13 @@ function doLogin()
 
     // will have to load contacts, set contact id attributes
 		hideOrShow( "loggedInDiv", true);
-		hideOrShow( "accessUIDiv", true);
 		hideOrShow( "loginDiv", false);
+		// loadContacts();
 	}
 	catch(err)
 	{
-		document.getElementById("loginResult").innerHTML = err.message;
+		// document.getElementById("loginResult").innerHTML = err.message;
+		return;
 	}
 
 }
@@ -54,7 +55,6 @@ function doLogout()
 	userId = 0;
 
 	hideOrShow( "loggedInDiv", false);
-	hideOrShow( "accessUIDiv", false);
 	hideOrShow( "loginDiv", true);
 }
 
@@ -104,8 +104,8 @@ function hideOrShow( elementId, showState )
 }
 function loadContacts()
 {
-	var url = urlBase + '/Test.' + extension;
-	var jsonPayload = '{"userId" : "' + userId + '"}';
+	var url = urlBase + '/Search.' + extension;
+	var jsonPayload = '{"userID" : "' + userId + '"name": "","phone": "","email": ""}';
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -115,6 +115,16 @@ function loadContacts()
 
 		var jsonObject = JSON.parse( xhr.responseText );
 
+		if(jsonObject.id == 0)
+			return;
+
+		var i;
+		for(i = 0; i < jsonObject.results.length/3; i++)
+		{
+			var name = jsonObject.results[i];
+			var phone = jsonObject.results[i+1];
+			var email = jsonObject.results[i+2];
+		}
 
 	}
 	catch(err)
@@ -155,7 +165,6 @@ function addContact()
 	}
 
 }
-
 function deleteContact(contactId)
 {
   // will probably unique ID from contact HTML
