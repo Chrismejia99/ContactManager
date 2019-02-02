@@ -1,0 +1,24 @@
+
+
+Given login and password, it returns the ID of that user, which is also the value used to identify contcacts...
+Each Contact has a KEY, called userID, that links them to their respective users. These values are the same
+
+
+{
+	"login": "thisIsMyUsername",
+	"password": "ThisIsMyPassword"
+}
+
+success looks like 
+{
+	"id": 16,
+	"error": ""
+}
+
+failure is denoted by a zero for the id and an error message.
+{
+	"id": 0,
+	"error": "No Records Found"
+}
+
+

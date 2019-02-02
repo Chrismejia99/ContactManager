@@ -1,0 +1,32 @@
+Expects input as JSON in the format {"name":"", "phone": "", "email": "", "userID":""}
+
+for easy viewing:
+
+{
+  "name": "",
+  "phone": "",
+  "email": "",
+  "userID": ""
+}
+
+
+
+You can leave all fields black and it  won't break
+
+it only goes
+
+{
+	"deletion": 0,
+	"error": "Contact Not Found"
+}
+
+This only happens if the input is wrong, which it should never be. If you give
+proper input, which any user can see when he choses to delete someone, then
+it should return with
+
+{
+	"deletion": 1,
+	"error": ""
+}
+
+This is success, 1 for yes , 0 for no

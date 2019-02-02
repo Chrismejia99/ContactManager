@@ -1,0 +1,20 @@
+
+
+SIGNUP works similarily to login, it succeeds and returns the userID or Fails and gives error message and a 0 for id (indicates fail)
+
+{
+	"login": "thisIsMyUsername",
+	"password": "ThisIsMyPassword"
+}
+
+success looks like 
+{
+	"id": 16,
+	"error": ""
+}
+
+failure is denoted by a zero for the id and an error message.
+{
+	"id": 0,
+	"error": "Username already exists"
+}

@@ -1,0 +1,155 @@
+
+PLEASE NOTE:
+This file works for both Searching and Showing All Contacts, 
+Only thing that makes the difference is the input
+
+
+It won't crash no matter if it's left blank or not, this is the best php file yet
+any or no fields can be filled and it will return ANY contact that has that piece of info in it
+
+
+Sorry but the order of input is arranged a little different for this one
+userID is up front, instead of at the end. I'm actually not sure if it matters
+But it works in this format for sure.
+
+{
+  "userID": "",
+  "name": "",
+  "phone": "",
+  "email": ""
+}
+
+Ex.
+
+If someone is named Spongebob,
+and you only type in bob,
+it'll return Spongebob!!
+
+Pretty neat
+
+
+BOTTOM LINE:
+Place inside the params whatever the user inputs, and if some contact has that input in one of their contacts, it'll return them
+
+
+
+SEARCH:
+minimum requirements:
+
+{
+  "userID": "",
+  "name": "",
+  "phone": "",
+  "email": ""
+}
+
+OUTPUT:
+
+this is something to explain so buckle in...
+
+{
+"results": [
+  "bobbette",
+  "9543459824",
+  "mail@email.com",
+  "",
+  "(132)-435-9787",
+  "murder@gmail.com",
+  "Alex Hernandez",
+  "",
+  "me@me.com",
+  "Mic Jagger",
+  "3216049871",
+  "",
+  "Pablo Escobar",
+  "1234567890",
+  "cocoaine@drugs.plz"
+],
+"error": ""
+}
+
+
+results is an array of strings, where the number of contacts returned is (length/3) because for each person they return a name, phone, and email.
+so for this example
+bobbette has a phone number of 9543459824 and her email is mail@email.com
+
+if the string is left blank, that means the contact has an empty string for that field, which is allowed in the database and should be displayed as such
+
+so you'll have to iterate through the array and get all that info for display.
+
+
+
+IF they have no contacts 
+
+{
+	"id": 0,
+	"error": "No Records Found"
+}
+
+the id and error message will flag it
+
+
+
+FOR THE SHOW ALL;
+
+it's the same input, but you can leave all those values as empty strings aside from userID, this will give back all the contacts for that user
+
+so 
+
+
+
+{
+  "userID": "3",
+  "name": "",
+  "phone": "",
+  "email": ""
+}
+
+OUTPUT:
+{
+	"results": [
+	  "",
+	  "9543459824",
+	  "mail@email.com",
+	  "",
+	  "(132)-435-9787",
+	  "murder@gmail.com",
+	  "Heloo",
+	  "3216049871",
+	  "me@me.com",
+	  "Meself",
+	  "3216049871",
+	  "me@me.com",
+	  "Pablo Escobar",
+	  "1234567890",
+	  "cocoaine@drugs.plz"
+	],
+	"error": ""
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,142 @@
+Input Requirements:
+Json String in the format of 
+
+{"name":"", "phone":"", "email":"", "userID":""}
+
+for easier view, this is equivalent == 
+
+{
+	"name" : " INPUT ", 
+	
+	"phone" : " INPUT ", 
+	
+	"email" : " INPUT ", 
+	
+	"userID" : " INPUT "
+}
+
+EXAMPLES
+
+
+Valid input example :
+{
+	"name" : "John Wick", 
+	
+	"phone" : "(132)-435-9787", 
+	
+	"email" : "murder@gmail.com", 
+	
+	"userID" : "3"
+}
+
+Output:
+{
+	"id": 3,
+	
+	"error": ""
+}
+
+Valid input example :
+{
+	"name" : "Spongebob Squarepants", 
+	
+	"phone" : "3334445566", 
+	
+	"email" : "anything can go in these fields", 
+	
+	"userID" : 25
+}
+
+Output:
+{
+	"id": 25,
+	
+	"error": ""
+}
+
+Valid input example :
+{
+	"name" : "", 
+	
+	"phone" : "", 
+	
+	"email" : "Business@opportunity.com", 
+	
+	"userID" : "3"
+}
+
+Output:
+{
+	"id": 3,
+	
+	"error": ""
+}
+
+Valid input example :
+{
+	"name" : "", 
+	
+	"phone" : "954-240-9876", 
+	
+	"email" : "", 
+	
+	"userID" : "3"
+}
+
+Output:
+{
+	"id": 3,
+	
+	"error": ""
+}
+
+
+
+
+
+
+Warning messages, NOT ERRORs, will occur from
+
+
+When no info but userID is given
+{
+	"name" : "", 
+	
+	"phone" : "", 
+	
+	"email" : "", 
+	
+	"userID" : "12"
+}
+
+gives back
+
+{
+	"id": "0",
+	
+	"error": "Please give info"
+}
+
+
+If the contact already exists for this person
+{
+	"name" : "Spongebob Squarepants", 
+	
+	"phone" : "3334445566", 
+	
+	"email" : "murder@gmail.com", 
+	
+	"userID" : 25
+}
+
+Output: 
+{
+	"id": "0",
+	
+	"error": "Contact Already Present"
+}
+
+
+
+
+

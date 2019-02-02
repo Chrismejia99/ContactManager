@@ -1,0 +1,40 @@
+General Doucmentation:
+
+
+Please note that all these values are treated as Strings aside from userId, it does not need to be in quotations but it also doesn't break it
+
+
+*please note that userID is the same value as the respective User's ID field in the Database*, 
+Contacts and Users have the same ID 
+Contacts = ID
+
+Users = userID
+
+
+The quotations are necessary! (aside from userID)  it shall fault otherwise
+
+
+obviously replace INSERT INPUT HERE with the actual input
+all values CAN be left blank EXCEPT userID
+
+
+NOT case sensitive, alphanumeric and other characters are fine input for all fields excluding userID which should be positive numeric
+
+
+Input will vary but the JSON input will generally look like 
+
+
+
+{"name":"", "phone":"", "email":"", "userID":""}
+
+for easier view, this is equivalent == 
+
+{
+	"name" : "INSERT INPUT HERE", 
+	
+	"phone" : "INSERT INPUT HERE", 
+	
+	"email" : "INSERT INPUT HERE", 
+	
+	"userID" : "INSERT INPUT HERE"
+}
