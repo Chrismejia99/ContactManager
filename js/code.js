@@ -146,10 +146,14 @@ function addContact()
   var newPhone = document.getElementById("phone").value;
   var newEmail = document.getElementById("email").value;
 
-	document.getElementById("colorAddResult").innerHTML = "";
+	document.getElementById("name").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("email").value = "";
 
-	var jsonPayload = '{"Name" : "' + newName + '", "phone" : "' + newPhone + '", "email" : "' + newEmail + '", "userId" : ' + userId + '}';
-	var url = urlBase + '/AddColor.' + extension;
+	// document.getElementById("colorAddResult").innerHTML = "";
+
+	var jsonPayload = '{"name" : "' + newName + '", "phone" : "' + newPhone + '", "email" : "' + newEmail + '", "userID" : ' + userId + '}';
+	var url = urlBase + '/Add.' + extension;
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -161,7 +165,10 @@ function addContact()
 			if (this.readyState == 4 && this.status == 200)
 			{
 				// change this to add contact HTML and display all the contacts
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
+				// document.getElementById("colorAddResult").innerHTML = "Color has been added";
+				hideOrShow("addContactDiv", false);
+				hideOrShow("loggedInDiv", true);
+				loadContacts();
 			}
 		};
 		xhr.send(jsonPayload);
