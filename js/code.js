@@ -40,7 +40,7 @@ function doLogin()
     // will have to load contacts, set contact id attributes
 		hideOrShow( "loggedInDiv", true);
 		hideOrShow( "loginDiv", false);
-		// loadContacts();
+		loadContacts();
 	}
 	catch(err)
 	{
@@ -105,7 +105,7 @@ function hideOrShow( elementId, showState )
 function loadContacts()
 {
 	var url = urlBase + '/Search.' + extension;
-	var jsonPayload = '{"userID" : "' + userId + '"name": "","phone": "","email": ""}';
+	var jsonPayload = '{"userID" : "' + userId + '","name": "","phone": "","email": ""}';
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -118,12 +118,19 @@ function loadContacts()
 		if(jsonObject.id == 0)
 			return;
 
-		var i;
-		for(i = 0; i < jsonObject.results.length/3; i++)
+		var i = 0;
+		var contactIndex;
+
+		for(contactIndex = 1; contactIndex <= jsonObject.results.length/3; contactIndex++)
 		{
-			var name = jsonObject.results[i];
-			var phone = jsonObject.results[i+1];
-			var email = jsonObject.results[i+2];
+			var nameID = "name" + contactIndex;
+			var phoneID = "phone" + contactIndex;
+			var emailID = "email" + contactIndex;
+			var contactDivID = "contact" + contactIndex;
+			document.getElementById(nameID).innerHTML = jsonObject.results[i++];
+			document.getElementById(phoneID).innerHTML = jsonObject.results[i++];
+			document.getElementById(emailID).innerHTML = jsonObject.results[i++];
+			document.getElementById( contactDivID ).style.display = "block";
 		}
 
 	}
