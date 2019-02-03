@@ -182,14 +182,33 @@ function addContact()
 function deleteContact(contactId)
 {
   // will probably unique ID from contact HTML
+	var nameID = "name" + contactId;
+	var phoneID = "phone" + contactId;
+	var emailID = "email" + contactId;
+	var contactTrID = "contact" + contactId;
 
+	var nameStr = document.getElementById(nameID).innerHTML;
+	var phoneStr = document.getElementById(phoneID).innerHTML;
+	var emailStr = document.getElementById(emailID).innerHTML;
 
-  // var jsonPayload = '{"userId" : "' + userId + '", "Name" : "' + contactName + '"}';
 	var url = urlBase + '/Delete.' + extension;
-	var jsonPayload = '{"userId" : "' + userId + '",  "contactId" : "' + contactId + '"}';
-
+	var jsonPayload = '{"name" : "' + nameStr + '", "phone":"' + phoneStr + '", "email":"' + emailStr + '",  "userID" :' + userId + '}';
+	document.getElementById( contactTrID ).style.display = "none";
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.send(jsonPayload);
+
+		var jsonObject = JSON.parse( xhr.responseText );
+
+	}
+	catch(err)
+	{
+		// document.getElementById("loginResult").innerHTML = err.message;
+		return;
+	}
 }
 function searchContact()
 {
