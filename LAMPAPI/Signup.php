@@ -4,6 +4,7 @@
 
 	$s1 = $inData["login"];
 	$s2 = $inData["password"];
+	$hash = hash("md5", $s2);
 	
 	$id = 0;
 
@@ -26,7 +27,7 @@
 		}
 		else
 		{
-			$sql = "INSERT INTO Users (Username, Password) Values ('" . $inData["login"] . "' , '" . $inData["password"] . "')";
+			$sql = "INSERT INTO Users (Username, Password) Values ('" . $inData["login"] . "' , '" . $hash . "')";
 
 			$conn->query($sql);
 			$sql = "SELECT ID FROM Users WHERE Username='" . $s1 . "'";

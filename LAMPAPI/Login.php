@@ -11,7 +11,8 @@
 	} 
 	else
 	{
-		$sql = "SELECT ID FROM Users where Username='" . $inData["login"] . "' and Password='" . $inData["password"] . "'";
+		$hash = hash("md5", $inData["password"]);
+		$sql = "SELECT ID FROM Users where Username='" . $inData["login"] . "' and Password='" . $hash . "'";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0)
 		{
