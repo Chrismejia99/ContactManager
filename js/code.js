@@ -175,7 +175,8 @@ function addContact()
 	}
 	catch(err)
 	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
+		// document.getElementById("colorAddResult").innerHTML = err.message;
+		return;
 	}
 
 }
@@ -213,14 +214,16 @@ function deleteContact(contactId)
 function searchContact()
 {
   // might have to make all html in one page to preserve userId, otherwise new document will reset it's id to 0
-	var srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
+	var nameSearch = document.getElementById("nameSearch").value;
+	var phoneSearch = document.getElementById("phoneSearch").value;
+	var emailSearch = document.getElementById("emailSearch").value;
 
-	var colorList = document.getElementById("colorList");
-	colorList.innerHTML = "";
 
-	var jsonPayload = '{"search" : "' + srch + '"}';
-	var url = urlBase + '/SearchColors.' + extension;
+	var searchResults = document.getElementById("searchResults");
+	searchResults.innerHTML = "";
+	var jsonPayload = '{"userID" : "' + userId + '", "name" : "' + nameSearch + '", "phone" : "' + phoneSearch + '", "email" : "' + emailSearch + '"}';
+
+	var url = urlBase + '/Search.' + extension;
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -231,18 +234,19 @@ function searchContact()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				hideOrShow( "colorList", true );
-
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
 				var jsonObject = JSON.parse( xhr.responseText );
 
 				var i;
 				for( i=0; i<jsonObject.results.length; i++ )
 				{
-					var opt = document.createElement("option");
-					opt.text = jsonObject.results[i];
-					opt.value = "";
-					colorList.options.add(opt);
+					var contactResult = document.createElement("div");
+					contactResult.innerHTML = jsonObject.results[i];
+					searchResults.appendChild(contactResult);
+					if(i%3 == 2)
+					{
+						var contactBr = document.createElement("br");
+						searchResults.appendChild(contactBr);
+					}
 				}
 			}
 		};
@@ -250,7 +254,8 @@ function searchContact()
 	}
 	catch(err)
 	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
+		// document.getElementById("colorSearchResult").innerHTML = err.message;
+		return;
 	}
 
 }
