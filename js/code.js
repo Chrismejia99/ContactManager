@@ -40,6 +40,7 @@ function doLogin()
     // will have to load contacts, set contact id attributes
 		hideOrShow( "loggedInDiv", true);
 		hideOrShow( "loginDiv", false);
+		hideOrShow( "signupDiv", false);
 		loadContacts();
 	}
 	catch(err)
@@ -54,8 +55,38 @@ function doLogout()
 {
 	userId = 0;
 
-	hideOrShow( "loggedInDiv", false);
+	goToLogin();
+}
+
+function goToLogin()
+{
 	hideOrShow( "loginDiv", true);
+	hideOrShow( "loggedInDiv", false);
+	hideOrShow( "signupDiv", false);
+}
+
+function goToSignup()
+{
+	hideOrShow( "signupDiv", true);
+	hideOrShow( "loginDiv", false);
+	hideOrShow( "loggedInDiv", false);
+}
+
+function signupCheck()
+{
+	var login = document.getElementById("signupName").value;
+  var password = document.getElementById("signupPassword").value;
+	var confirm = document.getElementById("confirmPassword").value;
+
+	if(password == confirm)
+	{
+		createUser();
+	}
+	else
+	{
+		alert("Error: Passwords do not match!");
+    form.password.focus();
+	}
 }
 
 function createUser()
