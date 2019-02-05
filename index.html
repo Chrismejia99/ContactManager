@@ -26,7 +26,7 @@
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="loginPassword" placeholder="Enter password" name="pswd">
         </div>
-        <button type="button" name="login" class="btn btn-primary" onclick="doLogin()">Log In</button>
+        <button type="button" name="login" class="btn btn-primary" onclick="loginCheck()">Log In</button>
         <button type="button" name="new" class="btn btn-secondary" onclick="goToSignup()">New User</button>
       </form>
     </div>
@@ -40,15 +40,15 @@
       <form class="" action="" method="post">
         <div class="form-group">
             <label for="usr">Username:</label>
-            <input type="text" class="form-control" id="signupName" placeholder="Enter username" name="usr">
+            <input type="text" onfocus="this.value=''" class="form-control" id="signupName" placeholder="Enter username" name="usr">
        </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="signupPassword" placeholder="Enter password" name="pswd">
+            <input type="password" onfocus="this.value=''" class="form-control" id="signupPassword" placeholder="Enter password" name="pswd">
        </div>
         <div class="form-group">
             <label for="confirmpswd">Confirm Password:</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Re-enter password" name="confirmpswd">
+            <input type="password" onfocus="this.value=''" class="form-control" id="confirmPassword" placeholder="Re-enter password" name="confirmpswd">
         </div>
         <button type="button" name="Cancel" class="btn btn-primary" onclick="goToLogin()">Cancel</button>
         <button type="button" name="Signup" class="btn btn-secondary" onclick="signupCheck()">Sign Up</button>
