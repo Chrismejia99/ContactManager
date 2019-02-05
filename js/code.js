@@ -4,12 +4,17 @@ var extension = "php";
 
 var userId = 0;
 
-function doLogin()
+function doLogin(type)
 {
 	userId = 0;
-
 	var login = document.getElementById("loginName").value;
 	var password = document.getElementById("loginPassword").value;
+
+  if(type = 1)
+	{
+		login = document.getElementById("signupName").value;
+		password = document.getElementById("signupPassword").value;
+  }
 
 	// document.getElementById("loginResult").innerHTML = "";
 
@@ -60,6 +65,12 @@ function doLogout()
 
 function goToLogin()
 {
+	document.getElementById("signupName").value = "";
+  document.getElementById("signupPassword").value = "";
+	document.getElementById("confirmPassword").value = "";
+	document.getElementById("loginName").value = "";
+  document.getElementById("loginPassword").value = "";
+
 	hideOrShow( "loginDiv", true);
 	hideOrShow( "loggedInDiv", false);
 	hideOrShow( "signupDiv", false);
@@ -74,25 +85,45 @@ function goToSignup()
 
 function signupCheck()
 {
-	var login = document.getElementById("signupName").value;
-  var password = document.getElementById("signupPassword").value;
-	var confirm = document.getElementById("confirmPassword").value;
+	var name = document.getElementById("signupName");
+  var password = document.getElementById("signupPassword");
+	var confirm = document.getElementById("confirmPassword");
 
-	if(password == confirm)
+	if (name.value == "")
 	{
-		createUser();
+		alert("Error: Must enter a username!");
+		confirm.focus();
+	  password.focus();
+    name.focus();
+	}
+	else if (password.value == "")
+	{
+		alert("Error: Must enter a password!");
+		confirm.focus();
+    password.focus();
+	}
+	else if (confirm.value == "")
+	{
+		alert("Error: Must confirm password!");
+		confirm.focus();
+    password.focus();
+	}
+	else if(password.value != confirm.value)
+	{
+		alert("Error: Passwords do not match!");
+		confirm.focus();
+	  password.focus();
 	}
 	else
 	{
-		alert("Error: Passwords do not match!");
-    form.password.focus();
+		createUser();
 	}
 }
 
 function createUser()
 {
-  var login = document.getElementById("loginName").value;
-  var password = document.getElementById("loginPassword").value;
+  var login = document.getElementById("signupName").value;
+  var password = document.getElementById("signupPassword").value;
 
 	var jsonPayload = '{"login" : "' + login + '", "password" : "' + password + '"}';
 	var url = urlBase + '/Signup.' + extension;
@@ -112,7 +143,7 @@ function createUser()
 
 		xhr.send(jsonPayload);
 
-		doLogin();
+		doLogin(1);
 	}
 	catch(err)
 	{
