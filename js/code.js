@@ -10,7 +10,7 @@ function doLogin(type)
 	var login = document.getElementById("loginName").value;
 	var password = document.getElementById("loginPassword").value;
 
-  if(type = 1)
+  if(type == 1)
 	{
 		login = document.getElementById("signupName").value;
 		password = document.getElementById("signupPassword").value;
