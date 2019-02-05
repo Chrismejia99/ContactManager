@@ -63,6 +63,29 @@ function doLogout()
 	goToLogin();
 }
 
+function loginCheck()
+{
+	var name = document.getElementById("loginName");
+  var password = document.getElementById("loginPassword");
+
+	if (name.value == "")
+	{
+		alert("Error: Must enter a username!");
+	  password.focus();
+    name.focus();
+	}
+	else if (password.value == "")
+	{
+		alert("Error: Must enter a password!");
+		confirm.focus();
+    password.focus();
+	}
+	else
+	{
+		doLogin();
+	}
+}
+
 function goToLogin()
 {
 	document.getElementById("signupName").value = "";
