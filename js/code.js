@@ -160,7 +160,7 @@ function createUser()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("addUser").innerHTML = "User has been created";
+				//document.getElementById("addUser").innerHTML = "User has been created";
 			}
 		};
 
@@ -170,7 +170,7 @@ function createUser()
 	}
 	catch(err)
 	{
-		document.getElementById("addUser").innerHTML = err.message;
+		//document.getElementById("addUser").innerHTML = err.message;
 	}
 }
 
